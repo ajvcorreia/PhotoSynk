@@ -9,3 +9,4 @@ mydb = mysql.connector.connect(
 mycursor = mydb.cursor()
 
 mycursor.execute("CREATE DATABASE IF NOT EXISTS photosynk")
+mycursor.execute("CREATE TABLE IF NOT EXISTS log (DateTime DATETIME, M:essage VARCHAR(255))")
