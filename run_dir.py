@@ -8,6 +8,7 @@ import time
 import exifread
 import math
 import configparser
+import mysql.connector
 import db
 
 #Search for Storage device
