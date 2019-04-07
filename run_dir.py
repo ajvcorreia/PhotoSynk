@@ -83,7 +83,8 @@ for path,dirs,files in os.walk(start_path):
             sql = "SELECT * FROM Files WHERE Hash = '%s'"
             val = (FileHash.hexdigest())
             print FileHash.hexdigest()
-            cursor.execute(sql, (val,))
+            print val
+            cursor.execute(sql,val)
             records = cursor.fetchall()
             FilesFoundCount = cursor.rowcount
             print "FilesFound %s" % (FilesFoundCount)
