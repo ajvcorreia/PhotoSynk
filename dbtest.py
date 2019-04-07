@@ -7,7 +7,7 @@ def getDeveloperDetails(ID):
                                              user='photosynk',
                                              password='password')
         cursor = mySQLConnection.cursor(prepared=True)
-        sql_select_query = """select * from Files where id = %s"""
+        sql_select_query = """select * from Files where Hash = %s"""
         cursor.execute(sql_select_query, (ID, ))
         record = cursor.fetchall()
         for row in record:
