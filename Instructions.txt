@@ -8,6 +8,7 @@ sudo apt-get install php libapache2-mod-php -y
 sudo apt-get install unzip -y
 sudo apt-get install php-mysql
 sudo apt-get install git
+sudo apt-get install -y mediainfo
 git config --global user.email "ajvcorreia@gmail.com"
 git config --global user.name "ajvcorreia"
 
@@ -26,6 +27,10 @@ GRANT ALL PRIVILEGES ON * . * TO 'photosynk'@'localhost';
 FLUSH PRIVILEGES;
 
 http://192.168.0.56/phpmyadmin/index.php
+
+add . ; git commit --allow-empty-message -m '' ; git push
+git pull ; python run_dir.py
+
 
 GIT
 Commit
