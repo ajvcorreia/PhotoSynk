@@ -8,6 +8,7 @@ import time
 import exifread
 import math
 import configparser
+import db
 
 #Search for Storage device
 ##Check Free disk space
@@ -26,6 +27,13 @@ config.read('PhotoSynk.ini')
 for IgnoredFile in config['IgnoredFiles']:
     print IgnoredFile
 
+mydb = mysql.connector.connect(
+          host="localhost",
+            user="photosynk",
+              passwd="password",
+              database="photosynk"
+              )
+mycursor = mydb.cursor()
 
 obj_Disk = psutil.disk_usage('/')
 DiskPercentUsed = (obj_Disk.percent)
@@ -92,9 +100,13 @@ for path,dirs,files in os.walk(start_path):
             #    Reason = "File allready in database"
             if os.path.exists(file):# and FilesFoundCount == 0:
                 #write filename and hash to database
-                mydict = { "filename": file, "Hash": FileHash.hexdigest(), "Camera": str(CameraModel), "Created": str(time.ctime(mtime)) }
+                    mydict = { "filename": file, "Hash": FileHash.hexdigest(), "Camera": str(CameraModel), "Created": str(time.ctime(mtime)) }
                 #x = mycol.insert_one(mydict)
                 #print results to default output
+                sql = "INSERT INTO Files (Camera, Hash, FileName) VALUES (%s, %s, %s)"
+                val = (str(CameraModel), FileHash.hexdigest(), file)
+                mycursor.execute(sql, val)
+                mydb.commit()
                 print "%s, %s, %s, %s, %s, %s, %sMB, %s, %s" % (PercentageProgress, FileCount, FilesCount, file, CameraModel, FileHash.hexdigest(), FileSize/1024/1024, round(ElapsedTime,2), time.ctime(mtime))
             else:
                 #Error occured, file does not seem to exist
