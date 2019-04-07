@@ -88,7 +88,10 @@ for path,dirs,files in os.walk(start_path):
             records = cursor.fetchall()
             FilesFoundCount = cursor.rowcount
             print "FilesFound %s" % (FilesFoundCount)
-
+            for row in records:
+                print(row[0])
+                print(row[1])
+                print(row[2])
 
 
             FileSize = os.stat(file).st_size
