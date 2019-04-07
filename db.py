@@ -3,7 +3,7 @@ import mysql.connector
 mydb = mysql.connector.connect(
           host="localhost",
             user="photosynk",
-              passwd="password"
+              passwd="password",
               )
 
 mycursor = mydb.cursor()
