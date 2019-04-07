@@ -3,7 +3,7 @@ import mysql.connector
 mydb = mysql.connector.connect(
           host="localhost",
             user="photosynk",
-              passwd="password",
+              passwd="password"
               )
 
 mycursor = mydb.cursor()
@@ -12,7 +12,7 @@ mycursor.execute("CREATE DATABASE IF NOT EXISTS photosynk")
 mydb = mysql.connector.connect(
           host="localhost",
             user="photosynk",
-              passwd="password"
+              passwd="password",
               database="photosynk"
               )
 mycursor.execute("CREATE TABLE IF NOT EXISTS log (DateTime DATETIME, Message VARCHAR(255))")
