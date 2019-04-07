@@ -73,10 +73,18 @@ for path,dirs,files in os.walk(start_path):
             #Calculate MD5 hash of file
             FileHash = hash.md5sum_chunks(file)
             #Check if file exists or is in database already
-            myquery = { "Hash": FileHash.hexdigest() }
+            #myquery = { "Hash": FileHash.hexdigest() }
             #FilesFoundCount = mycol.count(myquery)
             #FilesFound = mycol.find(myquery)
             #Get FileSize
+            sql = "SELECT * FROM Files WHERE Hash ='%s'"
+            val = (hash)
+            mycursor.execute(sql, val)
+            myresult = mycursor.fetchall()
+            FilesFoundCount = 0
+            for x in myresult:
+                FilesFoundCount = FilesFoundCount + 1
+            print FilesFoundCount
             FileSize = os.stat(file).st_size
             #Keep runnig total of FileSize
             total_size = total_size + FileSize
