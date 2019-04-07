@@ -1,0 +1,37 @@
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install python-pip
+sudo apt-get install python3-pip
+sudo apt-get install mysql
+sudo apt-get install apache2
+sudo apt-get install php libapache2-mod-php -y
+sudo apt-get install unzip -y
+sudo apt-get install php-mysql
+sudo apt-get install git
+git config --global user.email "ajvcorreia@gmail.com"
+git config --global user.name "ajvcorreia"
+
+sudo pip install exifread
+sudo pip install psutil
+sudo pip install configparser
+sudo pip install mysql-connector
+
+wget https://files.phpmyadmin.net/phpMyAdmin/4.8.5/phpMyAdmin-4.8.5-all-languages.zip
+unzip phpMyAdmin-4.8.5-all-languages.zip
+mv phpMyAdmin-4.8.5-all-languages phpmyadmin
+sudo mv phpmyadmin /var/www/html/
+
+CREATE USER 'photosynk'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON * . * TO 'photosynk'@'localhost';
+FLUSH PRIVILEGES;
+
+http://192.168.0.56/phpmyadmin/index.php
+
+GIT
+Commit
+> git add .
+> git commit
+> git push
+
+update
+> git clone -branch master https://github.com/ajvcorreia/PhotoSynk
