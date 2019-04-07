@@ -100,7 +100,7 @@ for path,dirs,files in os.walk(start_path):
             #    Reason = "File allready in database"
             if os.path.exists(file):# and FilesFoundCount == 0:
                 #write filename and hash to database
-                    mydict = { "filename": file, "Hash": FileHash.hexdigest(), "Camera": str(CameraModel), "Created": str(time.ctime(mtime)) }
+                mydict = { "filename": file, "Hash": FileHash.hexdigest(), "Camera": str(CameraModel), "Created": str(time.ctime(mtime)) }
                 #x = mycol.insert_one(mydict)
                 #print results to default output
                 sql = "INSERT INTO Files (Camera, Hash, FileName) VALUES (%s, %s, %s)"
