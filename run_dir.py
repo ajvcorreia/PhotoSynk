@@ -80,10 +80,10 @@ for path,dirs,files in os.walk(start_path):
 
 
             sql_select_query = """select * from Files where Hash = %s"""
-            cursor.execute(sql_select_query, (ID, ))
+            cursor.execute(sql_select_query, (FileHash,hexdigest(), ))
             record = cursor.fetchall()
             print cursor.rowcount
-            
+
 
 
             FileSize = os.stat(file).st_size
