@@ -15,4 +15,5 @@ mydb = mysql.connector.connect(
               passwd="password",
               database="photosynk"
               )
-mycursor.execute("CREATE TABLE log (DateTime DATETIME, Message VARCHAR(255))")
+mycursor = mydb.cursor()
+mycursor.execute("CREATE TABLE IF NOT EXISTS log (DateTime DATETIME, Message VARCHAR(255))")
