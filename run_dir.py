@@ -77,8 +77,8 @@ for path,dirs,files in os.walk(start_path):
             #FilesFoundCount = mycol.count(myquery)
             #FilesFound = mycol.find(myquery)
             #Get FileSize
-            sql = "SELECT * FROM Files WHERE Hash = %s"
-            val = (FileHash)
+            sql = "SELECT * FROM Files WHERE Hash = '%s'"
+            val = (FileHash.hexdigest())
             mycursor.execute(sql, val)
             myresult = mycursor.fetchall()
             FilesFoundCount = 0
