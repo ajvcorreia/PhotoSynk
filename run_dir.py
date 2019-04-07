@@ -122,7 +122,7 @@ for path,dirs,files in os.walk(start_path):
                 #Error occured, file does not seem to exist
                 #Write error filename to database
                 mydict = { "filename": file, "Hash": FileHash.hexdigest(), "Camera": str(CameraModel), "Created": str(time.ctime(mtime)), "Error": Reason }
-                sql = "INSERT INTO Files (Camera, Hash, FileName, Error) VALUES (%s, %s, %s, %s)"
+                sql = "INSERT INTO Errors (Camera, Hash, FileName, Error) VALUES (%s, %s, %s, %s)"
                 val = (str(CameraModel), FileHash.hexdigest(), file, Reason)
                 cursor.execute(sql, val)
                 mydb.commit()
