@@ -34,7 +34,7 @@ mydb = mysql.connector.connect(
               passwd="password",
               database="photosynk"
               )
-cursor = mydb.cursor()
+cursor = mydb.cursor(prepared=True)
 
 obj_Disk = psutil.disk_usage('/')
 DiskPercentUsed = (obj_Disk.percent)
