@@ -34,7 +34,7 @@ mydb = mysql.connector.connect(
               passwd="password",
               database="photosynk"
               )
-mycursor = mydb.cursor()
+cursor = mydb.cursor()
 
 obj_Disk = psutil.disk_usage('/')
 DiskPercentUsed = (obj_Disk.percent)
@@ -119,7 +119,7 @@ for path,dirs,files in os.walk(start_path):
                 #print results to default output
                 sql = "INSERT INTO Files (Camera, Hash, FileName) VALUES (%s, %s, %s)"
                 val = (str(CameraModel), FileHash.hexdigest(), file)
-                mycursor.execute(sql, val)
+                cursor.execute(sql, val)
                 mydb.commit()
                 print "%s, %s, %s, %s, %s, %s, %sMB, %s, %s" % (PercentageProgress, FileCount, FilesCount, file, CameraModel, FileHash.hexdigest(), FileSize/1024/1024, round(ElapsedTime,2), time.ctime(mtime))
             else:
@@ -128,7 +128,7 @@ for path,dirs,files in os.walk(start_path):
                 mydict = { "filename": file, "Hash": FileHash.hexdigest(), "Camera": str(CameraModel), "Created": str(time.ctime(mtime)), "Error": Reason }
                 sql = "INSERT INTO Files (Camera, Hash, FileName, Error) VALUES (%s, %s, %s, %s)"
                 val = (str(CameraModel), FileHash.hexdigest(), file, Reason)
-                mycursor.execute(sql, val)
+                cursor.execute(sql, val)
                 mydb.commit()
                 #x = errors.insert_one(mydict)
                 #print("could not open :", file)
