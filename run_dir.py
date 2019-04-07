@@ -83,6 +83,7 @@ for path,dirs,files in os.walk(start_path):
             myresult = mycursor.fetchall()
             FilesFoundCount = 0
             for x in myresult:
+                print (x)
                 FilesFoundCount = FilesFoundCount + 1
             print FilesFoundCount
             FileSize = os.stat(file).st_size
