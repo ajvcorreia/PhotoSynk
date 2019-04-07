@@ -10,6 +10,7 @@ def getDeveloperDetails(ID):
         sql_select_query = """select * from Files where Hash = %s"""
         cursor.execute(sql_select_query, (ID, ))
         record = cursor.fetchall()
+        print cursor.Count
         for row in record:
             print("DateTime = ", row[0], )
             print("Camera = ", row[1])
