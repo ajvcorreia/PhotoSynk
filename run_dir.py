@@ -82,6 +82,7 @@ for path,dirs,files in os.walk(start_path):
             mycursor.execute(sql, val)
             myresult = mycursor.fetchall()
             FilesFoundCount = 0
+            print myresult
             for x in myresult:
                 print (x)
                 FilesFoundCount = FilesFoundCount + 2
