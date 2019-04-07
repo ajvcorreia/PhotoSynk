@@ -84,7 +84,7 @@ for path,dirs,files in os.walk(start_path):
             val = (FileHash.hexdigest())
             cursor.execute(sql, val)
             records = cursor.fetchall()
-            FilesFoundCount = cursor.rowcount()
+            FilesFoundCount = cursor.rowcount
             print FilesFoundCount
             sys.exit(0)
 
