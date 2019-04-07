@@ -77,7 +77,7 @@ for path,dirs,files in os.walk(start_path):
             #FilesFoundCount = mycol.count(myquery)
             #FilesFound = mycol.find(myquery)
             #Get FileSize
-            sql = "SELECT * FROM Files WHERE Hash ='%s'"
+            sql = "SELECT * FROM Files WHERE Hash = '%s'"
             val = (FileHash)
             mycursor.execute(sql, val)
             myresult = mycursor.fetchall()
@@ -107,7 +107,7 @@ for path,dirs,files in os.walk(start_path):
             #if FilesFoundCount > 0:
             #    print "%s File %s allready in datbase" % (PercentageProgress, file)
             #    Reason = "File allready in database"
-            if os.path.exists(file):# and FilesFoundCount == 0:
+            if os.path.exists(file) and FilesFoundCount == 0:
                 #write filename and hash to database
                 mydict = { "filename": file, "Hash": FileHash.hexdigest(), "Camera": str(CameraModel), "Created": str(time.ctime(mtime)) }
                 #x = mycol.insert_one(mydict)
