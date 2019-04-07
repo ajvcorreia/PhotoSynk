@@ -77,16 +77,19 @@ for path,dirs,files in os.walk(start_path):
             #FilesFoundCount = mycol.count(myquery)
             #FilesFound = mycol.find(myquery)
             #Get FileSize
+
+
+
             sql = "SELECT * FROM Files WHERE Hash = '%s'"
             val = (FileHash.hexdigest())
-            mycursor.execute(sql, val)
-            myresult = mycursor.fetchall()
-            FilesFoundCount = 0
-            print myresult
-            for x in myresult:
-                print (x)
-                FilesFoundCount = FilesFoundCount + 2
+            cursor.execute(sql, val)
+            records = cursor.fetchall()
+            FilesFoundCount = cursor.rowcount()
             print FilesFoundCount
+            sys.exit(0)
+
+
+
             FileSize = os.stat(file).st_size
             #Keep runnig total of FileSize
             total_size = total_size + FileSize
