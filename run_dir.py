@@ -73,19 +73,11 @@ for path,dirs,files in os.walk(start_path):
             #Calculate MD5 hash of file
             FileHash = hash.md5sum_chunks(file)
             #Check if file exists or is in database already
-            #myquery = { "Hash": FileHash.hexdigest() }
-            #FilesFoundCount = mycol.count(myquery)
-            #FilesFound = mycol.find(myquery)
-            #Get FileSize
-
-
             sql_select_query = """select * from Files where Hash = %s"""
             cursor.execute(sql_select_query, (FileHash.hexdigest(), ))
             record = cursor.fetchall()
             FilesFoundCount = cursor.rowcount
-
-
-
+            #Get FileSize
             FileSize = os.stat(file).st_size
             #Keep runnig total of FileSize
             total_size = total_size + FileSize
@@ -105,9 +97,9 @@ for path,dirs,files in os.walk(start_path):
                 print "Enough space on destination storage, file should be copied"
             else:
                 print "Not enough space on destination storage, file should NOT be copied"
-            #if FilesFoundCount > 0:
-            #    print "%s File %s allready in datbase" % (PercentageProgress, file)
-            #    Reason = "File allready in database"
+            if FilesFoundCount > 0:
+                print "%s File %s allready in datbase" % (PercentageProgress, file)
+                Reason = "File allready in database"
             if os.path.exists(file) and FilesFoundCount == 0:
                 #write filename and hash to database
                 mydict = { "filename": file, "Hash": FileHash.hexdigest(), "Camera": str(CameraModel), "Created": str(time.ctime(mtime)) }
