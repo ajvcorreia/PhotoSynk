@@ -9,6 +9,8 @@ sudo apt-get install unzip -y
 sudo apt-get install php-mysql
 sudo apt-get install git
 sudo apt-get install -y mediainfo
+sudo apt-get install python3-pyudev
+
 git config --global user.email "ajvcorreia@gmail.com"
 git config --global user.name "ajvcorreia"
 

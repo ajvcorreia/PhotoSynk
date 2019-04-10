@@ -1,0 +1,9 @@
+Disk /dev/sdc: 59.5 GiB, 63864569856 bytes, 124735488 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0x00000000
+
+Device     Boot Start       End   Sectors  Size Id Type
+/dev/sdc1       32768 124735487 124702720 59.5G  7 HPFS/NTFS/exFAT
