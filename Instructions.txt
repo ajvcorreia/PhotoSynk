@@ -30,7 +30,7 @@ FLUSH PRIVILEGES;
 
 http://192.168.0.56/phpmyadmin/index.php
 
-add . ; git commit --allow-empty-message -m '' ; git push
+sudo git add . ; git commit --allow-empty-message -m '' ; git push
 git pull ; python run_dir.py
 
 
