@@ -19,6 +19,17 @@ sudo pip install psutil
 sudo pip install configparser
 sudo pip install mysql-connector
 
+#Configure LCD
+sudo rm -rf LCD-show
+git clone https://github.com/goodtft/LCD-show.git
+chmod -R 755 LCD-show
+cd LCD-show/
+#Change output to LCD
+sudo ./LCD35-show
+#Change output to HDMI
+sudo ./LCD-hdmi
+
+
 wget https://files.phpmyadmin.net/phpMyAdmin/4.8.5/phpMyAdmin-4.8.5-all-languages.zip
 unzip phpMyAdmin-4.8.5-all-languages.zip
 mv phpMyAdmin-4.8.5-all-languages phpmyadmin
