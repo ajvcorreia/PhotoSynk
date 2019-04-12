@@ -52,14 +52,17 @@ sudo reboot
 
 sudo apt-get install python-pip
 sudo apt-get install python3-pip
-sudo apt-get install mysql
+sudo apt-get install mysql-server
 sudo apt-get install apache2
 sudo apt-get install php libapache2-mod-php -y
 sudo apt-get install unzip -y
 sudo apt-get install php-mysql
 sudo apt-get install -y mediainfo
 sudo apt-get install python3-pyudev
+sudo apt-get install exfat-fuse exfat-utils
 
+#All the above in a single command
+sudo apt-get install python-pip python3-pip mysql-server apache2 php libapache2-mod-php unzip php-mysql mediainfo python3-pyudev exfat-fuse exfat-utils -y
 
 
 sudo pip install exifread
@@ -74,6 +77,7 @@ unzip phpMyAdmin-4.8.5-all-languages.zip
 mv phpMyAdmin-4.8.5-all-languages phpmyadmin
 sudo mv phpmyadmin /var/www/html/
 
+sudo mysql -u root
 CREATE USER 'photosynk'@'localhost' IDENTIFIED BY 'password';
 GRANT ALL PRIVILEGES ON * . * TO 'photosynk'@'localhost';
 FLUSH PRIVILEGES;
@@ -91,4 +95,4 @@ Commit
 > git push
 
 update
-> git clone -branch master https://github.com/ajvcorreia/PhotoSynk
+> git clone https://github.com/ajvcorreia/PhotoSynk
