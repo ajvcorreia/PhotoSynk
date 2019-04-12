@@ -50,6 +50,8 @@ sudo apt-get install xserver-xorg-input-evdev
 sudo cp -rf /usr/share/X11/xorg.conf.d/10-evdev.conf /usr/share/X11/xorg.conf.d/45-evdev.conf
 sudo reboot
 
+export DISPLAY=:0
+
 sudo apt-get install python-pip
 sudo apt-get install python3-pip
 sudo apt-get install mysql-server
