@@ -1,23 +1,37 @@
+Create a file calle ssh (no extension) on boot partition on sd card
+boot the pi
+wait for link to be available
+login to ssh
 sudo apt-get update
 sudo apt-get upgrade
-sudo apt-get install python-pip
-sudo apt-get install python3-pip
-sudo apt-get install mysql
-sudo apt-get install apache2
-sudo apt-get install php libapache2-mod-php -y
-sudo apt-get install unzip -y
-sudo apt-get install php-mysql
-sudo apt-get install git
-sudo apt-get install -y mediainfo
-sudo apt-get install python3-pyudev
+sudo raspi-config
 
+Network Settings
+- Hostname
+-- PhotoSynk
+- WIFI
+-- Select your country
+-- configure your WIFI if you want (will be used for AP later on)
+- Network interface names
+-- Yes
+- Boot Options
+-- Desktop Autologin
+- Wait for Network at Boot
+-- No
+- Splash Screen
+-- Yes
+- Interface Options
+-- VNC
+--- Yes
+- Advanced Options
+-- Memory Split
+--- 16
+- Finish
+- Reboot
+
+sudo apt-get install git vim htop iperf
 git config --global user.email "ajvcorreia@gmail.com"
 git config --global user.name "ajvcorreia"
-
-sudo pip install exifread
-sudo pip install psutil
-sudo pip install configparser
-sudo pip install mysql-connector
 
 #Configure LCD
 sudo rm -rf LCD-show
@@ -28,6 +42,28 @@ cd LCD-show/
 sudo ./LCD35-show
 #Change output to HDMI
 sudo ./LCD-hdmi
+
+#Configure Touch screen
+sudo apt-get install xserver-xorg-input-evdev
+sudo cp -rf /usr/share/X11/xorg.conf.d/10-evdev.conf /usr/share/X11/xorg.conf.d/45-evdev.conf
+
+sudo apt-get install python-pip
+sudo apt-get install python3-pip
+sudo apt-get install mysql
+sudo apt-get install apache2
+sudo apt-get install php libapache2-mod-php -y
+sudo apt-get install unzip -y
+sudo apt-get install php-mysql
+sudo apt-get install -y mediainfo
+sudo apt-get install python3-pyudev
+
+
+
+sudo pip install exifread
+sudo pip install psutil
+sudo pip install configparser
+sudo pip install mysql-connector
+
 
 
 wget https://files.phpmyadmin.net/phpMyAdmin/4.8.5/phpMyAdmin-4.8.5-all-languages.zip
