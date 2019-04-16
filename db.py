@@ -1,32 +1,32 @@
-import mysql.connector
-from mysql.connector import Error
-from mysql.connector import errorcode
+#import mysql.connector
+#from mysql.connector import Error
+#from mysql.connector import errorcode
+import pymysql
+#def AddDrive(Drive, Serial, GivenName):
+    # try:
+    #     mydb = mysql.connector.connect(
+    #               host="localhost",
+    #                 user="photosynk",
+    #                   passwd="password"
+    #                   )
+    #     mydb.autocommit = false
+    #     mycursor = mydb.cursor()
+    #     sql = "INSERT INTO Drives (Drive, Serial, GivenName) VALUES (%s, %s, %s)"
+    #     val = (Drive, Serial, GivenName)
+    #     mycursor.execute(sql, val)
+    #     mydb.commit()
+    # except mysql.connector.Error as error :
+    #     print("Failed to update record to database rollback: {}".format(error))
+    #     #reverting changes because of exception
+    #     conn.rollback()
+    # finally:
+    #     #closing database connection.
+    #     if(conn.is_connected()):
+    #         cursor.close()
+    #         conn.close()
+    #         print("connection is closed")
 
-def AddDrive(Drive, Serial, GivenName)
-    try:
-        mydb = mysql.connector.connect(
-                  host="localhost",
-                    user="photosynk",
-                      passwd="password"
-                      )
-        mydb.autocommit = false
-        mycursor = mydb.cursor()
-        sql = "INSERT INTO Drives (Drive, Serial, GivenName) VALUES (%s, %s, %s)"
-        val = (Drive, Serial, GivenName)
-        mycursor.execute(sql, val)
-        mydb.commit()
-    except mysql.connector.Error as error :
-        print("Failed to update record to database rollback: {}".format(error))
-        #reverting changes because of exception
-        conn.rollback()
-    finally:
-        #closing database connection.
-        if(conn.is_connected()):
-            cursor.close()
-            conn.close()
-            print("connection is closed")
-
-
+mydb = mysql.connector.connect(host="localhost", user="photosynk", passwd="password")
 mycursor = mydb.cursor()
 mycursor.execute("CREATE DATABASE IF NOT EXISTS photosynk")
 

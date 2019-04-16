@@ -72,6 +72,7 @@ sudo apt-get install python-pip python3-pip mysql-server apache2 php libapache2-
 sudo pip install exifread
 sudo pip install psutil
 sudo pip install configparser
+sudo python3 -m pip install PyMySQL
 sudo pip install mysql-connector
 
 

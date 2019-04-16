@@ -3,13 +3,13 @@ import hashlib
 import io
 import hash
 import psutil
-import pymongo
 import time
 import exifread
 import math
 import configparser
-import mysql.connector
-import db
+import pymysql
+#import db
+import ExifData
 
 #Search for Storage device
 ##Check Free disk space
@@ -22,11 +22,13 @@ import db
 #3 - Does a file exist with the same MD5 hash
 #4 - if is a photo Does a file exist with same EXIF data
 
+GetExifTag('/mnt/SD/iPhone_old/2016-09-01 16.53.04.jpg', 'Image Model')
+
 #Get configuration from ini file
 config = configparser.ConfigParser(allow_no_value=True)
 config.read('PhotoSynk.ini')
 for IgnoredFile in config['IgnoredFiles']:
-    print IgnoredFile
+    print(IgnoredFile)
 
 mydb = mysql.connector.connect(
           host="localhost",
@@ -39,7 +41,7 @@ cursor = mydb.cursor(prepared=True)
 obj_Disk = psutil.disk_usage('/')
 DiskPercentUsed = (obj_Disk.percent)
 FreeSpace = (obj_Disk.free)
-print FreeSpace
+print(FreeSpace)
 #create connection mongo database
 #myclient = pymongo.MongoClient("mongodb://localhost:27017/")
 #mydb = myclient["CopiedFiles"]
@@ -94,11 +96,11 @@ for path,dirs,files in os.walk(start_path):
             PercentageProgress = (FileCount * 100) / FilesCount
             ElapsedTime = time.time() - start_time
             if FreeSpace > FileSize:
-                print "Enough space on destination storage, file should be copied"
+                print("Enough space on destination storage, file should be copied")
             else:
-                print "Not enough space on destination storage, file should NOT be copied"
+                print("Not enough space on destination storage, file should NOT be copied")
             if FilesFoundCount > 0:
-                print "%s File %s allready in datbase" % (PercentageProgress, file)
+                print("%s File %s allready in datbase" % (PercentageProgress, file))
                 Reason = "File allready in database"
             if os.path.exists(file) and FilesFoundCount == 0:
                 #write filename and hash to database
@@ -109,7 +111,7 @@ for path,dirs,files in os.walk(start_path):
                 val = (str(CameraModel), FileHash.hexdigest(), file)
                 cursor.execute(sql, val)
                 mydb.commit()
-                print "%s, %s, %s, %s, %s, %s, %sMB, %s, %s" % (PercentageProgress, FileCount, FilesCount, file, CameraModel, FileHash.hexdigest(), FileSize/1024/1024, round(ElapsedTime,2), time.ctime(mtime))
+                print("%s, %s, %s, %s, %s, %s, %sMB, %s, %s" % (PercentageProgress, FileCount, FilesCount, file, CameraModel, FileHash.hexdigest(), FileSize/1024/1024, round(ElapsedTime,2), time.ctime(mtime)))
             else:
                 #Error occured, file does not seem to exist
                 #Write error filename to database
@@ -121,7 +123,7 @@ for path,dirs,files in os.walk(start_path):
                 #x = errors.insert_one(mydict)
                 #print("could not open :", file)
 finished = time.time() - begin
-print "Total time : %s" % round(finished,2)
-print "Total %sMB" % (total_size/1024/1024)
+print("Total time : %s" % round(finished,2))
+print("Total %sMB" % (total_size/1024/1024))
 #for x in mycol.find():
 #  print(x)
