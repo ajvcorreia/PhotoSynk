@@ -1,1 +1,2 @@
-import os
+def test(text):
+    return "some other text"

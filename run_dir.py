@@ -22,7 +22,8 @@ import ExifData
 #3 - Does a file exist with the same MD5 hash
 #4 - if is a photo Does a file exist with same EXIF data
 
-GetExifTag('/mnt/SD/iPhone_old/2016-09-01 16.53.04.jpg', 'Image Model')
+hash.md5sum_chunks('/mnt/SD/iPhone_old/2016-09-01 16.53.04.jpg')
+GetExifTagInfo('/mnt/SD/iPhone_old/2016-09-01 16.53.04.jpg', 'Image Model')
 
 #Get configuration from ini file
 config = configparser.ConfigParser(allow_no_value=True)
