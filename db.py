@@ -26,11 +26,11 @@ import pymysql
     #         conn.close()
     #         print("connection is closed")
 
-mydb = mysql.connector.connect(host="localhost", user="photosynk", passwd="password")
+mydb = pymysql.connect(host="localhost", user="photosynk", passwd="password")
 mycursor = mydb.cursor()
 mycursor.execute("CREATE DATABASE IF NOT EXISTS photosynk")
 
-mydb = mysql.connector.connect(
+mydb = pymysql.connect(
           host="localhost",
             user="photosynk",
               passwd="password",

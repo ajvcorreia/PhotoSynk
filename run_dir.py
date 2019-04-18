@@ -4,13 +4,12 @@ import io
 import hash
 import psutil
 import time
-import exifread
 import math
 import configparser
 import pymysql
-#import db
-import ExifData
-
+import db
+import accessories
+import shutil
 #Search for Storage device
 ##Check Free disk space
 #Calculate total space used by files to be copied
@@ -22,8 +21,6 @@ import ExifData
 #3 - Does a file exist with the same MD5 hash
 #4 - if is a photo Does a file exist with same EXIF data
 
-hash.md5sum_chunks('/mnt/SD/iPhone_old/2016-09-01 16.53.04.jpg')
-GetExifTagInfo('/mnt/SD/iPhone_old/2016-09-01 16.53.04.jpg', 'Image Model')
 
 #Get configuration from ini file
 config = configparser.ConfigParser(allow_no_value=True)
@@ -31,13 +28,13 @@ config.read('PhotoSynk.ini')
 for IgnoredFile in config['IgnoredFiles']:
     print(IgnoredFile)
 
-mydb = mysql.connector.connect(
+mydb = pymysql.connect(
           host="localhost",
             user="photosynk",
               passwd="password",
               database="photosynk"
               )
-cursor = mydb.cursor(prepared=True)
+cursor = mydb.cursor()
 
 obj_Disk = psutil.disk_usage('/')
 DiskPercentUsed = (obj_Disk.percent)
@@ -54,8 +51,9 @@ FileCount = 0
 total_size = 0
 PercentageProgress = 0
 CameraModel = ""
-start_path = "/mnt/SD"
+start_path = "/media/pi/SD/"
 #start_path = "/Users/acorreia/Photos_Test"
+DestinatioPath = "/media/pi/SSD1/temp/"
 FileHash = ""
 FilesCount = 0
 begin = time.time()
@@ -88,12 +86,7 @@ for path,dirs,files in os.walk(start_path):
             FileCount = FileCount + 1
             #calculate elapsed time for this file
             #get exif info from photo
-            f = open(file, 'rb')
-            tags = exifread.process_file(f)
-            CameraModel = "N/A"
-            for tag in tags.keys():
-                if tag in ('Image Model'):
-                    CameraModel = tags[tag]
+            CameraModel = accessories.GetExifTagData(file,'Image Model')
             PercentageProgress = (FileCount * 100) / FilesCount
             ElapsedTime = time.time() - start_time
             if FreeSpace > FileSize:
@@ -108,6 +101,7 @@ for path,dirs,files in os.walk(start_path):
                 mydict = { "filename": file, "Hash": FileHash.hexdigest(), "Camera": str(CameraModel), "Created": str(time.ctime(mtime)) }
                 #x = mycol.insert_one(mydict)
                 #print results to default output
+                #shutil.copy2 (file, DestinatioPath+filename)
                 sql = "INSERT INTO Files (Camera, Hash, FileName) VALUES (%s, %s, %s)"
                 val = (str(CameraModel), FileHash.hexdigest(), file)
                 cursor.execute(sql, val)

@@ -1,6 +1,11 @@
 import hash
 import accessories
+import exifread
 
-print(hash.md5sum.chunks('/mnt/SD/iPhone_old/2016-09-01 16.53.04.jpg').hexdigest())
-GetExifTagInfo('/mnt/SD/iPhone_old/2016-09-01 16.53.04.jpg', 'Image Model')
+file = '/media/pi/SD/iPhone_old/2016-09-01 16.53.04.jpg'
+print(hash.md5sum.chunks(file).hexdigest())
+print(accessories.GetExifTagData(file,'Image Model'))
+
+
+#GetExifTagInfo(file, 'Image Model')
 #print(test("text"))
