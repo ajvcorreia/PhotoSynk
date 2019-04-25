@@ -49,6 +49,11 @@ sudo ./LCD35-show
 #Change output to HDMI
 sudo ./LCD-hdmi
 
+#Increase screen FPS
+> sudo vim /boot/config.txt
+Add the following in front of the line "dtoverlay=tft35a"
+:speed=41000000,fps=60
+
 #Configure Touch screen
 cd LCD-show/
 sudo apt-get install xserver-xorg-input-evdev
