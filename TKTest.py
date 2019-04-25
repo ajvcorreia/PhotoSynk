@@ -7,9 +7,9 @@ root.title("WOW")
 root.geometry("480x320+0+0")
 
 l = tk.Label(root, text="PhotoSynk Version 0.01", fg='Black', bg='Blue',  font=("Helvetica", 24))
-l.place(x = 240, y = 30, width=120, height=25)
+l.place(x = 20, y = 20, width=400, height=50)
 
-l= tk.Button(root, text="Quit")
+l= tk.Button(root, text="Synk Now...")
 l.place(x = 250, y = 270, width=120, height=50)
 
 root.mainloop()
