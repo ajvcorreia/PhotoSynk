@@ -16,7 +16,7 @@ l.place(x = 20, y = 20, width=440, height=50)
 l= tk.Button(root, text="Synk Now...")
 l.place(x = 20, y = 270, width=120, height=50)
 
-l= tk.Button(root, text="Reboot", command=run)
+l= tk.Button(root, text="Reboot", command=run())
 l.place(x = 340, y = 270, width=120, height=50)
 
 root.mainloop()
