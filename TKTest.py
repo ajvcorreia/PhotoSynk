@@ -4,7 +4,7 @@ import random
 root = tk.Tk()
 root.title("WOW")
 # width x height + x_offset + y_offset:
-root.geometry("475x250+0+0")
+root.geometry("480x320+0+0")
 
 languages = ['Python','Perl','C++','Java','Tcl/Tk']
 labels = range(5)
@@ -18,5 +18,14 @@ for i in range(5):
                 fg='White' if brightness < 120 else 'Black',
                 bg=bg_colour)
    l.place(x = 20, y = 30 + i*30, width=120, height=25)
+
+l = tk.Label(root,
+            text="Synk",
+            fg='White' if brightness < 120 else 'Black',
+            bg='Blue')
+l.place(x = 240, y = 30, width=120, height=25)
+
+l= tk.Button(root, text="Quit")
+l.place(x = 250, y = 270, width=120, height=50)
 
 root.mainloop()
