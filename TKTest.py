@@ -1,5 +1,9 @@
 import tkinter as tk
-import random
+import subprocess
+
+def run():
+    subprocess.run(["ls", "-l"])
+
 
 root = tk.Tk()
 root.title("WOW")
@@ -10,6 +14,9 @@ l = tk.Label(root, text="PhotoSynk Version 0.01", fg='Black', bg='White',  font=
 l.place(x = 20, y = 20, width=440, height=50)
 
 l= tk.Button(root, text="Synk Now...")
-l.place(x = 250, y = 270, width=120, height=50)
+l.place(x = 20, y = 270, width=120, height=50)
+
+l= tk.Button(root, text="Reboot", command=run)
+l.place(x = 340, y = 270, width=120, height=50)
 
 root.mainloop()
