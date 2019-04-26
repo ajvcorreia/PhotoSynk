@@ -43,12 +43,13 @@ Network Settings
 - Finish
 - Reboot
 
-vim ~/.config/pcmanfm/LXDE-pi/pcmanfm.conf
+sudo apt-get install git vim htop iperf
+
+sudo vim ~/.config/pcmanfm/LXDE-pi/pcmanfm.conf
 [volume]
 mount_on_startup=0
 mount_removable=0
 
-sudo apt-get install git vim htop iperf
 git config --global user.email "ajvcorreia@gmail.com"
 git config --global user.name "ajvcorreia"
 
