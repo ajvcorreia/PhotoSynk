@@ -1,5 +1,18 @@
 Flash sdcar with Raspbian
 Create a file calle ssh (no extension) on boot partition on sd card
+Create a file called wpa_supplicant.conf on boot partition on sd card with following contents
+
+country=GB
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+
+network={
+    ssid="your_real_wifi_ssid"
+    scan_ssid=1
+    psk="your_real_password"
+    key_mgmt=WPA-PSK
+}
+
 boot the pi
 wait for link to be available
 login to ssh
