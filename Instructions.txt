@@ -99,7 +99,8 @@ Add the following in front of the line "dtoverlay=tft35a"
 > sudo python3 -m pip install PyMySQL
 > sudo pip install mysql-connector
 
-
+#All the above in a single command
+> sudo pip install exifread psutil configparser PyMySQL mysql-connector
 
 > wget https://files.phpmyadmin.net/phpMyAdmin/4.8.5/phpMyAdmin-4.8.5-all-languages.zip
 > unzip phpMyAdmin-4.8.5-all-languages.zip
