@@ -16,9 +16,9 @@ network={
 boot the pi
 wait for link to be available
 login to ssh
-sudo apt-get update
-sudo apt-get upgrade
-sudo raspi-config
+> sudo apt-get update
+> sudo apt-get upgrade
+> sudo raspi-config
 
 Network Settings
 - Hostname
@@ -43,25 +43,25 @@ Network Settings
 - Finish
 - Reboot
 
-sudo apt-get install git vim htop iperf
+> sudo apt-get install git vim htop iperf
 
-sudo vim ~/.config/pcmanfm/LXDE-pi/pcmanfm.conf
+> sudo vim ~/.config/pcmanfm/LXDE-pi/pcmanfm.conf
 [volume]
 mount_on_startup=0
 mount_removable=0
 
-git config --global user.email "ajvcorreia@gmail.com"
-git config --global user.name "ajvcorreia"
+> git config --global user.email "ajvcorreia@gmail.com"
+> git config --global user.name "ajvcorreia"
 
 #Configure LCD
-sudo rm -rf LCD-show
-git clone https://github.com/goodtft/LCD-show.git
-chmod -R 755 LCD-show
-cd LCD-show/
+> sudo rm -rf LCD-show
+> git clone https://github.com/goodtft/LCD-show.git
+> chmod -R 755 LCD-show
+> cd LCD-show/
 #Change output to LCD, pi will reboot after this command
-sudo ./LCD35-show
+> sudo ./LCD35-show
 #Change output to HDMI
-sudo ./LCD-hdmi
+> sudo ./LCD-hdmi
 
 #Increase screen FPS
 > sudo vim /boot/config.txt
@@ -69,52 +69,52 @@ Add the following in front of the line "dtoverlay=tft35a"
 :speed=41000000,fps=60
 
 #Configure Touch screen
-cd LCD-show/
-sudo apt-get install xserver-xorg-input-evdev
-sudo cp -rf /usr/share/X11/xorg.conf.d/10-evdev.conf /usr/share/X11/xorg.conf.d/45-evdev.conf
-sudo reboot
+> cd LCD-show/
+> sudo apt-get install xserver-xorg-input-evdev
+> sudo cp -rf /usr/share/X11/xorg.conf.d/10-evdev.conf /usr/share/X11/xorg.conf.d/45-evdev.conf
+> sudo reboot
 
-export DISPLAY=:0
+> export DISPLAY=:0
 
-sudo apt-get install python-pip
-sudo apt-get install python3-pip
-sudo apt-get install mysql-server
-sudo apt-get install apache2
-sudo apt-get install php libapache2-mod-php -y
-sudo apt-get install unzip -y
-sudo apt-get install php-mysql
-sudo apt-get install -y mediainfo
-sudo apt-get install python3-pyudev
-sudo apt-get install exfat-fuse exfat-utils
-sudo apt-get install python-tk
-sudo apt-get install python3-tk
+> sudo apt-get install python-pip
+> sudo apt-get install python3-pip
+> sudo apt-get install mysql-server
+> sudo apt-get install apache2
+> sudo apt-get install php libapache2-mod-php -y
+> sudo apt-get install unzip -y
+> sudo apt-get install php-mysql
+> sudo apt-get install -y mediainfo
+> sudo apt-get install python3-pyudev
+> sudo apt-get install exfat-fuse exfat-utils
+> sudo apt-get install python-tk
+> sudo apt-get install python3-tk
 
 #All the above in a single command
-sudo apt-get install python-pip python3-pip mysql-server apache2 php libapache2-mod-php unzip php-mysql mediainfo python3-pyudev exfat-fuse exfat-utils python-tk python3-tk -y
+> sudo apt-get install python-pip python3-pip mysql-server apache2 php libapache2-mod-php unzip php-mysql mediainfo python3-pyudev exfat-fuse exfat-utils python-tk python3-tk -y
 
 
-sudo pip install exifread
-sudo pip install psutil
-sudo pip install configparser
-sudo python3 -m pip install PyMySQL
-sudo pip install mysql-connector
+> sudo pip install exifread
+> sudo pip install psutil
+> sudo pip install configparser
+> sudo python3 -m pip install PyMySQL
+> sudo pip install mysql-connector
 
 
 
-wget https://files.phpmyadmin.net/phpMyAdmin/4.8.5/phpMyAdmin-4.8.5-all-languages.zip
-unzip phpMyAdmin-4.8.5-all-languages.zip
-mv phpMyAdmin-4.8.5-all-languages phpmyadmin
-sudo mv phpmyadmin /var/www/html/
+> wget https://files.phpmyadmin.net/phpMyAdmin/4.8.5/phpMyAdmin-4.8.5-all-languages.zip
+> unzip phpMyAdmin-4.8.5-all-languages.zip
+> mv phpMyAdmin-4.8.5-all-languages phpmyadmin
+> sudo mv phpmyadmin /var/www/html/
 
-sudo mysql -u root
+> sudo mysql -u root
 CREATE USER 'photosynk'@'localhost' IDENTIFIED BY 'password';
 GRANT ALL PRIVILEGES ON * . * TO 'photosynk'@'localhost';
 FLUSH PRIVILEGES;
 
 http://192.168.0.56/phpmyadmin/index.php
 
-sudo git add . ; git commit --allow-empty-message -m '' ; git push
-git pull ; python run_dir.py
+> sudo git add . ; git commit --allow-empty-message -m '' ; git push
+> git pull ; python run_dir.py
 
 
 GIT
@@ -126,8 +126,8 @@ Commit
 update
 > git clone https://github.com/ajvcorreia/PhotoSynk
 
-cd /home/pi/PhotoSynk/.git
-sudo chgrp -R pi .
+> cd /home/pi/PhotoSynk/.git
+> sudo chgrp -R pi .
 
 
 Auto Run X11 App on mount_on_startup
@@ -144,3 +144,4 @@ su -s /bin/bash -c startx pi&
 put a # in front off the line containing ". /etc/X11/Xsession"
 Add followwing line to end of file:
 /usr/bin/python3.5 /home/pi/PhotoSynk/TKTest.py
+> sudo systemctl disable display-manager.service
