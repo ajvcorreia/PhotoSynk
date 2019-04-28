@@ -145,3 +145,6 @@ put a # in front off the line containing ". /etc/X11/Xsession"
 Add followwing line to end of file:
 /usr/bin/python3.5 /home/pi/PhotoSynk/TKTest.py
 > sudo systemctl disable display-manager.service
+
+Add the following to “/boot/cmdline.txt”:
+splash quiet plymouth.ignore-serial-consoles logo.nologo vt.global_cursor_default=0
