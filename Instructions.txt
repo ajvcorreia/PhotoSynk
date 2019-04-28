@@ -43,7 +43,7 @@ Network Settings
 - Finish
 - Reboot
 
-> sudo apt-get install git vim htop iperf
+> sudo apt-get install git vim htop iperf iptraf -y
 
 > sudo vim ~/.config/pcmanfm/LXDE-pi/pcmanfm.conf
 [volume]
