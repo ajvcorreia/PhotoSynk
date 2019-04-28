@@ -1,4 +1,4 @@
-Flash sdcar with Raspbian
+Flash sdcard with Raspbian
 Create a file calle ssh (no extension) on boot partition on sd card
 Create a file called wpa_supplicant.conf on boot partition on sd card with following contents
 
