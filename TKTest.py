@@ -2,7 +2,7 @@ import tkinter as tk
 import subprocess
 
 def run():
-    subprocess.run(["sudo", "reboot"])
+    subprocess.run(["sudo", "ls"])
 
 
 root = tk.Tk()
