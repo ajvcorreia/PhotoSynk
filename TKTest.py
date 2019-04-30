@@ -14,6 +14,9 @@ l = tk.Label(root, text="PhotoSynk Version 0.01", fg='Black', bg='White',  font=
 l.place(x = 20, y = 20, width=440, height=50)
 
 l= tk.Button(root, text="Synk Now...")
+l.place(x = 20, y = 200, width=120, height=50)
+
+l= tk.Button(root, text="Configure")
 l.place(x = 20, y = 270, width=120, height=50)
 
 l= tk.Button(root, text="Reboot", command=run())
