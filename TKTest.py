@@ -2,7 +2,7 @@ import tkinter as tk
 import subprocess
 
 def run():
-    subprocess.run(["sudo", "reboot"])
+    subprocess.run(["sudo", "ls"])
 
 
 root = tk.Tk()
@@ -10,7 +10,7 @@ root.title("WOW")
 # width x height + x_offset + y_offset:
 root.geometry("480x320+0+0")
 
-l = tk.Label(root, text="PhotoSynk Version 0.01", fg='Black', bg='White',  font=("Helvetica", 24), relief=RIDGE)
+l = tk.Label(root, text="PhotoSynk Version 0.01", fg='Black', bg='White',  font=("Helvetica", 24), relief="ridge")
 l.place(x = 20, y = 20, width=440, height=50)
 
 l= tk.Button(root, text="Auto Synk")

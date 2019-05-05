@@ -20,6 +20,8 @@ login to ssh
 > sudo apt-get upgrade
 > sudo raspi-config
 
+sudo apt-get update ; sudo apt-get upgrade -y
+
 Network Settings
 - Hostname
 -- PhotoSynk
@@ -43,7 +45,7 @@ Network Settings
 - Finish
 - Reboot
 
-> sudo apt-get install git vim htop iperf iptraf -y
+> sudo apt-get install git vim htop iperf -y
 
 > sudo vim ~/.config/pcmanfm/LXDE-pi/pcmanfm.conf
 [volume]
@@ -99,8 +101,7 @@ Add the following in front of the line "dtoverlay=tft35a"
 > sudo python3 -m pip install PyMySQL
 > sudo pip install mysql-connector
 
-#All the above in a single command
-> sudo pip install exifread psutil configparser PyMySQL mysql-connector
+
 
 > wget https://files.phpmyadmin.net/phpMyAdmin/4.8.5/phpMyAdmin-4.8.5-all-languages.zip
 > unzip phpMyAdmin-4.8.5-all-languages.zip
@@ -141,7 +142,7 @@ update-rc.d: warning: start and stop actions are no longer supported; falling ba
 allowed_users=anybody
 > sudo vim /etc/rc.local
 su -s /bin/bash -c startx pi&
-> sudo vim /etc/X11/xinit/xinitrc
+> sudo vim sudo nano /etc/X11/xinit/xinitrc
 put a # in front off the line containing ". /etc/X11/Xsession"
 Add followwing line to end of file:
 /usr/bin/python3.5 /home/pi/PhotoSynk/TKTest.py
