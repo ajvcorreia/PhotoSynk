@@ -10,6 +10,7 @@ import pymysql
 import db
 import accessories
 import shutil
+import sys
 #Search for Storage device
 ##Check Free disk space
 #Calculate total space used by files to be copied
@@ -39,7 +40,7 @@ cursor = mydb.cursor()
 obj_Disk = psutil.disk_usage('/')
 DiskPercentUsed = (obj_Disk.percent)
 FreeSpace = (obj_Disk.free)
-print(FreeSpace)
+print(FreeSpace/1024)
 #create connection mongo database
 #myclient = pymongo.MongoClient("mongodb://localhost:27017/")
 #mydb = myclient["CopiedFiles"]
@@ -51,17 +52,23 @@ FileCount = 0
 total_size = 0
 PercentageProgress = 0
 CameraModel = ""
-start_path = "/media/pi/SD/"
+start_path = "/mnt/Photos"
 #start_path = "/Users/acorreia/Photos_Test"
 DestinatioPath = "/media/pi/SSD1/temp/"
 FileHash = ""
 FilesCount = 0
 begin = time.time()
 #Count number of files for progress
+print("Counting files to be processed!")
 for path,dirs,files in os.walk(start_path):
     for filename in files:
         if filename[0] != ".":
             FilesCount = FilesCount + 1
+            print '\r' + "Found : " + str(FilesCount) + " files" , 
+
+print("Found %d files." % (FilesCount))
+print('%d %s cost $%.2f' % (6, 'bananas', 1.74))
+        
 
 for path,dirs,files in os.walk(start_path):
     for filename in files:

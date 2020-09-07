@@ -100,6 +100,7 @@ Add the following in front of the line "dtoverlay=tft35a"
 > sudo pip install configparser
 > sudo python3 -m pip install PyMySQL
 > sudo pip install mysql-connector
+> sudo pip install PyMySQL
 
 
 
@@ -131,6 +132,19 @@ update
 > cd /home/pi/PhotoSynk/.git
 > sudo chgrp -R pi .
 
+
+Install Cloud 9 IDE
+$ sudo apt-get update
+$ sudo apt-get install git nodejs
+$ git clone https://github.com/c9/core.git c9sdk
+$ cd c9sdk
+$ ./scripts/install-sdk.sh
+$ mkdir workspace
+$ cd workspace
+$ ln -s /home/pi/dev dev
+$ nodejs ./server.js -p 8181 -l 0.0.0.0 -a name:passwd -w workspace
+$ crontab -e
+@reboot nodejs /root/c9sdk/server.js -p 8080 -l 0.0.0.0 -a user:password -w /root/c9sdk/workspace
 
 Auto Run X11 App on mount_on_startup
 https://www.raspberrypi.org/forums/viewtopic.php?t=42888
