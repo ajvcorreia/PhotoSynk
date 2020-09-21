@@ -1,0 +1,13 @@
+*.zip - extract
+*.rar - extract
+IMG_10092014_181213.png
+thumbs.db
+.DS_Store
+*.ini
+.dropbox
+desktop.ini
+*.exe
+2016/10/23
+
+
+ 

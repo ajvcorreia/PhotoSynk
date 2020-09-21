@@ -102,12 +102,22 @@ Add the following in front of the line "dtoverlay=tft35a"
 > sudo pip install mysql-connector
 > sudo pip install PyMySQL
 
-
+install python3.8 dependencies - unnecessary
+> sudo apt-get install -y build-essential tk-dev libncurses5-dev libncursesw5-dev libreadline6-dev libdb5.3-dev libgdbm-dev libsqlite3-dev libssl-dev libbz2-dev libexpat1-dev liblzma-dev zlib1g-dev libffi-dev tar wget vim
+> wget https://www.python.org/ftp/python/3.8.0/Python-3.8.0.tgz
+> sudo tar zxf Python-3.8.0.tgz 
+> cd Python-3.8.0
+> sudo ./configure --enable-optimizations
+> sudo make -j 4
+> sudo make altinstall
 
 > wget https://files.phpmyadmin.net/phpMyAdmin/4.8.5/phpMyAdmin-4.8.5-all-languages.zip
 > unzip phpMyAdmin-4.8.5-all-languages.zip
 > mv phpMyAdmin-4.8.5-all-languages phpmyadmin
 > sudo mv phpmyadmin /var/www/html/
+
+
+/usr/local/lib/python2.7/dist-packages:/usr/local/lib/python3.4/dist-packages:
 
 > sudo mysql -u root
 CREATE USER 'photosynk'@'localhost' IDENTIFIED BY 'password';

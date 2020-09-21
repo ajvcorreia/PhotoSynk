@@ -1,5 +1,4 @@
 import pymysql
-import db
 
 mydb = pymysql.connect(
           host="localhost",
@@ -7,9 +6,7 @@ mydb = pymysql.connect(
               passwd="password",
               database="photosynk"
               )
-cursor = mydb.cursor()
+mycursor = mydb.cursor()
 
-sql = "DELETE FROM `Files`"
-cursor.execute(sql)
-sql = "DELETE FROM `Errors`"
-cursor.execute(sql)
+mycursor.execute("DELETE FROM Files")
+mycursor.execute("DELETE FROM Errors")

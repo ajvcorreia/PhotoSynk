@@ -56,10 +56,10 @@ FileCount = 0
 total_size = 0
 PercentageProgress = 0
 CameraModel = ""
-start_path = "/mnt/temp"
+start_path = "/mnt/source"
 #start_path = "/mnt/Photos/20161023_iPhoneJovita" 
 #start_path = "/Users/acorreia/Photos_Test"
-DestinatioPath = "/media/pi/SSD1/temp/"
+DestinatioPath = "/mnt/target"
 FileHash = ""
 FilesCount = 0
 begin = time.time()
@@ -69,7 +69,7 @@ for path,dirs,files in os.walk(start_path):
     for filename in files:
         if filename[0] != ".":
             FilesCount = FilesCount + 1
-            print '\r' + "Found : " + str(FilesCount) + " files" , 
+            #print('\r' + "Found : " + str(FilesCount) + " files" , )
 
 print("Found %d files." % (FilesCount))
 #print('%d %s cost $%.2f' % (6, 'bananas', 1.74))
@@ -85,8 +85,8 @@ for path,dirs,files in os.walk(start_path):
             (mode, ino, dev, nlink, uid, gid, size, atime, mtime, ctime) = os.stat(file)
             print("Calculating Hash for file : %s" % (file))
             #Calculate MD5 hash of file
-            #FileHash = hash.md5sum_chunks(file)
-            FileHash = hash.md5sum_whole(file)
+            #FileHash = hash.md5sum_chunks(file, 65536)
+            FileHash = hash.md5sum_full(file)
             #Check if file exists or is in database already
             sql_select_query = """select * from Files where Hash = %s"""
             cursor.execute(sql_select_query, (FileHash.hexdigest(), ))
@@ -104,11 +104,11 @@ for path,dirs,files in os.walk(start_path):
             PercentageProgress = (FileCount * 100) / FilesCount
             ElapsedTime = time.time() - start_time
             if FreeSpace > FileSize:
-                print("Enough space on destination storage, file should be copied")
+                print("Enough space on destination storage, file can be copied")
             else:
                 print("Not enough space on destination storage, file should NOT be copied")
             if FilesFoundCount > 0:
-                print("%s File %s allready in database" % (PercentageProgress, file))
+                print("%s File %s allready in database should not be copied" % (PercentageProgress, file))
                 Reason = "File allready in database"
             if os.path.exists(file) and FilesFoundCount == 0:
                 #write filename and hash to database
@@ -122,12 +122,38 @@ for path,dirs,files in os.walk(start_path):
                 mydb.commit()
                 print("%s, %s, %s, %s, %s, %s, %sMB, %s, %s" % (PercentageProgress, FileCount, FilesCount, file, CameraModel, FileHash.hexdigest(), FileSize/1024/1024, round(ElapsedTime,2), time.ctime(mtime)))
                 source = file
+                
+                # with exiftool.ExifTool() as et:
+                #     #metadata = et.get_metadata(source)
+                #     metadata = et.get_tag("QuickTime:ContentDistributor", source)
+                #     print("%s" % (metadata))
+                Camera = accessories.GetCameraModel(source)
+                
                 destination = DestinatioPath
-                print("copy %s to %s" % (source, destination))
-                ExifDate = accessories.GetExifTagData(file,'EXIF DateTimeOriginal')
+                #print("copy %s to %s" % (source, destination))
+                #ExifDate = accessories.GetExifTagData(file,'EXIF DateTimeOriginal')
                 FileDate = accessories.GetFileDate(source)
-                print("ExifDate %s FileDate %s" % (ExifDate, FileDate))
-                #shutil.copy2()
+                #print("Date %s %s %s" % (FileDate[0], FileDate[1], FileDate[2]))
+                destinationDir = os.path.join(destination, FileDate[0], FileDate[1], FileDate[2], str(Camera))
+                #print(destinationDir)
+                accessories.CreateDestionation(destinationDir)
+                copy_time = time.time()
+                print("Copy %s to %s" % (source, destinationDir))
+                try:
+                    shutil.copy2(source, destinationDir)
+                # If source and destination are same 
+                except shutil.SameFileError: 
+                    print("Source and destination represents the same file.") 
+                # If there is any permission issue 
+                except PermissionError: 
+                    print("Permission denied.") 
+                # For other errors 
+                except: 
+                    print("Error occurred while copying file.") 
+                CopyElapsedTime = time.time() - copy_time
+                FileSizeMB = FileSize/1024/1024
+                CopySpeed = FileSizeMB / CopyElapsedTime
+                print("File copied in %ss at %sMB/s" % (round(ElapsedTime,2), round(CopySpeed,2)))
             else:
                 #Error occured, file does not seem to exist
                 #Write error filename to database
