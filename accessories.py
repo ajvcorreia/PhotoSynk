@@ -3,6 +3,34 @@ import os
 import datetime
 import exiftool
 
+
+class File:
+    def __init__(self, Filename, HashValue, creationDate, Size, GPSCoords, Make, Model):
+        self.Filename = Filename
+        self.HashValue = HashValue
+        self.creationDate = creationDate
+        self.Size = Size
+        self.GPSCoords = GPSCoords
+        self.Make = Make
+        self.Model = Model
+        
+    def GetInfo(self):
+        self.GPSCoords = GetCoords(self.filename)
+        self.Model = GetCameraModel(self.filename)
+        self.Make = GetCameraMake(self.filename)
+        self.Size = 
+        
+        
+def GetCameraMake(source):
+    et = exiftool.ExifTool()
+    et.start()
+        metadata = et.get_tag("Make", source)
+    if metadata is None:
+        metadata = "Other"
+    et.terminate()
+    return metadata
+        
+
 def GetCameraModel(source):
     et = exiftool.ExifTool()
     et.start()
@@ -21,10 +49,6 @@ def GetCoords(source):
     et = exiftool.ExifTool()
     et.start()
     metadata = et.get_tag("GPS Position", source)
-    if metadata is None:
-        metadata = et.get_tag("Model", source)
-    if metadata is None:
-        metadata = et.get_tag("Camera Model Name", source)
     if metadata is None:
         metadata = "Other"
     print("%s" % (metadata))
@@ -61,11 +85,26 @@ def CreateDestionation(path):
     if not os.path.exists(path):
         try:
             os.makedirs(path)
-            print("Creating directory : %s" % (path))
+            #print("Creating directory : %s" % (path))
         except OSError:
             print ("Creation of the directory %s failed" % path)
-        else:
-            print ("Successfully created the directory %s" % path)
-    else:
-        print("Directory allready exists : %s" % (path))
+        #else:
+         #   print ("Successfully created the directory %s" % path)
+    #else:
+       # print("Directory allready exists : %s" % (path))
         
+def IgnoredFiles():
+    return ["thumbs.db", "Thumbs.db", ".DS_Store", "*.ini", ".dropbox", "desktop.ini"]
+
+
+#def FileInDB():
+    
+#def WriteFiletoDB():
+    
+
+#def GetFileData(file):
+    #returns boolean
+    #get date of file
+    #   - from exif
+    #   - from file information
+    #get 

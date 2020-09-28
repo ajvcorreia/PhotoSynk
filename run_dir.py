@@ -56,10 +56,14 @@ FileCount = 0
 total_size = 0
 PercentageProgress = 0
 CameraModel = ""
-start_path = "/mnt/source"
+#start_path = "/mnt/source"
 #start_path = "/mnt/Photos/20161023_iPhoneJovita" 
 #start_path = "/Users/acorreia/Photos_Test"
-DestinatioPath = "/mnt/target"
+#DestinatioPath = "/mnt/target"
+
+start_path = "/mnt/source/Dubai 2011"
+DestinatioPath = "/mnt/target/threadtest"
+
 FileHash = ""
 FilesCount = 0
 begin = time.time()
@@ -110,7 +114,7 @@ for path,dirs,files in os.walk(start_path):
             if FilesFoundCount > 0:
                 print("%s File %s allready in database should not be copied" % (PercentageProgress, file))
                 Reason = "File allready in database"
-            if os.path.exists(file) and FilesFoundCount == 0:
+            if os.path.exists(file) and FilesFoundCount == 0 and filename not in accessories.IgnoredFiles():
                 #write filename and hash to database
                 mydict = { "filename": file, "Hash": FileHash.hexdigest(), "Camera": str(CameraModel), "Created": str(time.ctime(mtime)) }
                 #x = mycol.insert_one(mydict)
