@@ -1,4 +1,5 @@
 import hashlib
+import xxhash
 import io
 
 def md5sum_whole(src):
@@ -14,6 +15,13 @@ def md5sum_chunks(src, length=io.DEFAULT_BUFFER_SIZE):
         for chunk in iter(lambda: fd.read(length), b''):
             md5.update(chunk)
     return md5
+
+def xxhash_chunks(src, length=io.DEFAULT_BUFFER_SIZE):
+    filehash = xxhash.xxh32()
+    with io.open(src, mode="rb") as fd:
+        for chunk in iter(lambda: fd.read(length), b''):
+            filehash.update(chunk)
+    return filehash
 
 def md5sum_full(src):
     md5 = hashlib.md5()

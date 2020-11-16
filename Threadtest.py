@@ -30,6 +30,7 @@ FileHash = ""
 FilesCount = 0
 FilesCount = 0
 begin = time.time()
+log = open("output.log","a")
 
 print(FreeSpace/1024)
 
@@ -42,8 +43,7 @@ def filehash(file):
 
 
 def processfile(file):
-    global total_size
-    global FileCount
+    global total_size, FileCount, log
     Reason = "unknown"
     mydb = pymysql.connect(
           host="localhost",
@@ -103,15 +103,19 @@ def processfile(file):
                 shutil.copy2(source, destinationDir)
             except shutil.SameFileError: 
                 print("Source and destination represents the same file.") 
+                log.write("Source and destination represents the same file.") 
             except PermissionError: 
-                print("Permission denied.") 
+                print("Permission denied.")
+                log.write("Permission denied.")
             except: 
                 print("Error occurred while copying file.") 
+                log.write("Error occurred while copying file.") 
             CopyElapsedTime = time.time() - copy_time
             FileSizeMB = FileSize/1024/1024
             CopySpeed = FileSizeMB / CopyElapsedTime
             ElapsedTime = time.time() - start_time
             print("%s, %s, %s, %s, %s, %s, %sMB, %s, %s, %s, %s, %s %s" % (round(PercentageProgress), FileCount, FilesCount, file, CameraModel, FileHash.hexdigest(), round(FileSize/1024/1024,2), round(ElapsedTime,2), round(exiftime,2), round(hashtime,2), round(query1time,2), round(query2time,2), round(CopyElapsedTime,2)))
+            log.write("%s, %s, %s, %s, %s, %s, %sMB, %s, %s, %s, %s, %s %s" % (round(PercentageProgress), FileCount, FilesCount, file, CameraModel, FileHash.hexdigest(), round(FileSize/1024/1024,2), round(ElapsedTime,2), round(exiftime,2), round(hashtime,2), round(query1time,2), round(query2time,2), round(CopyElapsedTime,2)))
         else:
             mydict = { "filename": file, "Hash": FileHash.hexdigest(), "Camera": str(CameraModel), "Created": str(time.ctime(mtime)), "Error": Reason }
             sql = "INSERT INTO Errors (Camera, Hash, FileName, Error) VALUES (%s, %s, %s, %s)"
@@ -143,10 +147,11 @@ for path,dirs,files in os.walk(start_path):
             file = os.path.join(path,filename)
             q.put(file)
 print("Finished scanning...")
-thread_count = 4
+thread_count = 8
 for i in range(thread_count):
     t = threading.Thread(target=worker, args = (q,))
     t.start()
 q.join()
 finished = time.time() - begin
 print("Total time : %s" % round(finished,2))
+log.write("Total time : %s" % round(finished,2))

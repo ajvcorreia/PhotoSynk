@@ -9,7 +9,44 @@ desktop.ini
 *.exe
 2016/10/23
 
-
+Remove zero byte files.
 
 no threads 91062
+threads 26000
+xxhash
+
+ThreadLockTest
+1 thread   : 1522.93
+2 threads  : 843.0
+3 threads  : 595.01
+4 threads  : 477.88
+5 threads  : 474.4
+6 threads  : 446.22
+7 threads  : 432.74
+8 threads  : 436.9
+9 threads  : 427.33
+10 threads : 415.3
+11 threads : 420.65
+12 threads : 419.22
+13 threads : 418.27
+14 threads : 414.48
+15 threads : 415.89
+16 threads : 414.89
+
+/mnt/source2/iPhone-20160617/2015-09/
+/mnt/source2/iPhone-20160617/2016-04/IMG_3698.JPG
+
+
+
+0.004679441452026367
+0.009001970291137695
  
+ 
+Roomba (Teka) IP address is: 192.168.0.35
+blid is: 3117442482129720
+Password=> :1:1515339024:jFb9X3o3Ao9Osil1 <= Yes, all this string.
+Use these credentials in roomba.py
+
+DSC03281.JPG
+
+apple case ID

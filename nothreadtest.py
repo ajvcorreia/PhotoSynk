@@ -2,36 +2,26 @@ import time
 import os
 import hash
 import time
+import math
 import datetime
 import accessories
 
 begin = time.time()
+source = "/mnt/source/USA 2015/gps"
+destination = "/mnt/source/USA 2015/gps2"
 
-def filehash(file):
-    #file = os.path.join(path,filename)
-    print("Hashing %s" % file)
-    FileHash = hash.md5sum_full(file)
-    FileHash.hexdigest()
-    print("Finished %s" % file)
-
-start_path = "/mnt/source/Dubai 2011"
 FilesCount = 0
-
-p1 = accessories.person("Antonio", 41)
-p1.myfunc()
-
-
-# Load up a queue with your data. This will handle locking
-
 print("Scanning files...")
 for path,dirs,files in os.walk(start_path):
     for filename in files:
         if filename[0] != ".":
             FilesCount = FilesCount + 1
             file = os.path.join(path,filename)
-            filehash(file)
+            file = accessories.File(file)
+            speed = file.Size / 1024 / 1024
+            speed = round(speed / file.HashTime, 2)
+            print("%s %s %s %s %s %s %s %s %s %s %s" % (FilesCount, file.Make, file.Model, file.GPSCoords, round(file.Size/1024/1024,2), file.creationDate, filename, file.HashValue.hexdigest(), round(file.HashTime,2), speed, str(file.AllreadyInDB())))
+            file.WriteFiletoDB()
 print("Finished scanning...")
-
-    
 finished = time.time() - begin
 print("Total time : %s" % round(finished,2))
